@@ -1,21 +1,15 @@
-Bootstrap Modal v2.2.5
+Bootstrap Modal v3
 =============
 
-See live demo [here](http://jschr.github.com/bootstrap-modal/).
+See live demo [here](https://github.com/nikolasfragkos/bootstrap-modal/blob/master/index.html).
 
-Extends Bootstrap's native modals to provide additional functionality. Introduces a **ModalManager** class that operates behind the scenes to handle multiple modals by listening on their events. 
+Extends Bootstrap's 3 native modals to provide additional functionality. Introduces a **ModalManager** class that operates behind the scenes to handle multiple modals by listening on their events. 
 
 A single ModalManager is created by default on body and can be accessed through the jQuery plugin interface.
 
     $('body').modalmanager('loading');
 
 Bootstrap-Modal can be used as a replacement for Bootstrap's Modal class or as a patch to the library.
-
-
-Bootstrap 3
------------
-
-If you're using BS3, I've provided a compatible css patch. Include `bootstrap-modal-bs3patch.css` **before** the main `bootstrap-modal.css` file to use this plugin with Bootstrap 3.
 
 If you're using the loading spinner functionality you may also need to change the default template to be compatible in js:
 
@@ -27,13 +21,13 @@ If you're using the loading spinner functionality you may also need to change th
         '</div>';
 
 
-**Note**: Since this plugin was created to solve a lot of the issues with BS2, it still uses the BS2 markup syntax. Currently I believe the default BS3 modal addresses some of the bigger issues and is not worth maintaining two versions of this plugin.
-
+**Note**: It uses the new modal html markup that is currently used in bootstrap 3.
 
 Overview
 -----------
 
-+ Backwards compatible
++ Uses boostrap 3 modal html markup
++ Custom show/hide/attention animations
 + Responsive
 + Stackable
 + Full width
@@ -46,7 +40,6 @@ Installation
 + Include `js/bootstrap-modalmanager.js` and `js/bootstrap-modal.js` after the main bootstrap js files.
 
 	<link href="css/bootstrap.css" rel="stylesheet" />
-	<link href="css/bootstrap-responsive.css" rel="stylesheet" />
  	<link href="css/bootstrap-modal.css" rel="stylesheet" />
 
  	<script src="js/bootstrap.js"></script>
@@ -87,8 +80,14 @@ The element or selector to set the focus to once the modal is shown.
 + **replace**
 If set to true, the modal will replace the topmost modal when opened.
 
++ **showAnimation**
+Set the animation when showing the modal. Any animation in [animate.css](http://daneden.me/animate/) is supported.
+
++ **hideAnimation**
+Set the animation when hiding the modal. Any animation in [animate.css](http://daneden.me/animate/) is supported.
+
 + **attentionAnimation**
-Set the animation used by the `attention` method. Any animation in [animate.css](http://daneden.me/animate/) is supported but only the *shake* animation is included by default.
+Set the animation used by the `attention` method. Any animation in [animate.css](http://daneden.me/animate/) is supported.
 
 + **modalOverflow**
 Set this property to true for modals with highly dynamic content. This will force the modal to behave as if it is larger than the viewport.
