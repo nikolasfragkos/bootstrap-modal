@@ -142,7 +142,7 @@ You can use `data-tabindex` instead of the default `tabindex` to specify the tab
     <input type="text" data-tabindex="1" />
     <input type="text" data-tabindex="2" />
 
-See the stackable example on the [demo](http://jschr.github.com/bootstrap-modal/) page for an example.
+See the stackable example on the [demo](http://nikolasfragkos.github.com/bootstrap-modal/) page for an example.
 
 
 	
