@@ -14,7 +14,10 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * ========================================================== */
+ * ==========================================================
+ *
+ * bootstrap-modal.js v3 by Nikolas Fragkos
+*/
 
 
 !function ($) {
@@ -131,7 +134,7 @@
             } else if (this.$element.hasClass("container")) {
                 this.$element.find(".modal-dialog").css('width', 'auto');
             } else {
-                if (this.$element.find(".modal-sm").length == 0 && this.$element.find(".modal-lg").length == 0 &&  this.$element.hasClass("container") ==  false)
+                if (this.$element.find(".modal-sm").length == 0 && this.$element.find(".modal-lg").length == 0)
                     this.$element.css('width', '600');
             }
 
