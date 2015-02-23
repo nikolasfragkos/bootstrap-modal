@@ -1,7 +1,7 @@
 Bootstrap Modal v3
 =============
 
-See live demo [here](https://github.com/nikolasfragkos/bootstrap-modal/blob/master/index.html).
+See live demo [here](http://nikolasfragkos.github.com/bootstrap-modal/).
 
 Extends Bootstrap's 3 native modals to provide additional functionality. Introduces a **ModalManager** class that operates behind the scenes to handle multiple modals by listening on their events. 
 
