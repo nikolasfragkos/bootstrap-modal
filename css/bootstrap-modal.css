@@ -1,16 +1,72 @@
-/*!
+/*
  * Bootstrap Modal
  *
  * Copyright Jordan Schroter
  * Licensed under the Apache License v2.0
  * http://www.apache.org/licenses/LICENSE-2.0
  *
- */
+ * Boostrap 3 patch for for bootstrap-modal. Include BEFORE bootstrap-modal.css!
+ *
+ * Bootstrap Modal v3 by Nikolas Fragkos
+*/
+
+body.modal-open,
+.modal-open .navbar-fixed-top,
+.modal-open .navbar-fixed-bottom {
+    margin-right: 0;
+}
+
+@media (min-width: 768px) {
+    .modal {
+        left: auto;
+        bottom: auto;
+        right: auto;
+        padding: 0;
+        width: auto;
+        -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+        background-clip: padding-box;
+    }
+    .modal-dialog {
+        margin: 0 auto;
+        padding: 0;
+    }
+}
+
+.modal-dialog:not(.modal-lg,.modal-sm) {
+    width: 600px;
+}
+
+.modal-backdrop, .modal-backdrop.fade.in {
+    bottom: 0;
+    z-index: 950;
+    position: fixed;
+}
+
+.animated {
+    -webkit-animation-duration: 0.6s !important;
+    -moz-animation-duration: 0.6s !important;;
+    -o-animation-duration: 0.6s !important;;
+    animation-duration: 0.6s !important;;
+}
+
+.modal.container {
+    max-width: none;
+}
+
+/*
+ * Bootstrap Modal
+ *
+ * Copyright Jordan Schroter
+ * Licensed under the Apache License v2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Bootstrap Modal v3 by Nikolas Fragkos
+*/
 
 .modal-open {
 	overflow: hidden;
 }
-
 
 /* add a scroll bar to stop page from jerking around */
 .modal-open.page-overflow .page-container,
@@ -86,7 +142,7 @@
 .modal-backdrop.fade.in{
 	opacity: 0.7;
 	filter: alpha(opacity=70);
-	background: #fff;
+	background: #333;
 }
 
 .modal.container {
@@ -122,7 +178,8 @@
 	}
 }
 
-@media (max-width: 979px) {
+/* @media (max-width: 979px) { */
+@media (max-width: 767px) {
 	.modal, 
 	.modal.container,
 	.modal.modal-overflow 	{
@@ -158,57 +215,17 @@
 	}
 }
 
+@media (max-width: 979px) {
+    .modal.container {
+        right: 1%;
+        left: 1%;
+        width: auto !important;
+    }
+}
+
 .loading-spinner {
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	margin: -12px 0 0 -12px;
-}
-
-/*
-Animate.css - http://daneden.me/animate
-Licensed under the ☺ license (http://licence.visualidiot.com/)
-
-Copyright (c) 2012 Dan Eden*/
-
-.animated {
-	-webkit-animation-duration: 1s;
-	   -moz-animation-duration: 1s;
-	     -o-animation-duration: 1s;
-	        animation-duration: 1s;
-	-webkit-animation-fill-mode: both;
-	   -moz-animation-fill-mode: both;
-	     -o-animation-fill-mode: both;
-	        animation-fill-mode: both;
-}
-
-@-webkit-keyframes shake {
-	0%, 100% {-webkit-transform: translateX(0);}
-	10%, 30%, 50%, 70%, 90% {-webkit-transform: translateX(-10px);}
-	20%, 40%, 60%, 80% {-webkit-transform: translateX(10px);}
-}
-
-@-moz-keyframes shake {
-	0%, 100% {-moz-transform: translateX(0);}
-	10%, 30%, 50%, 70%, 90% {-moz-transform: translateX(-10px);}
-	20%, 40%, 60%, 80% {-moz-transform: translateX(10px);}
-}
-
-@-o-keyframes shake {
-	0%, 100% {-o-transform: translateX(0);}
-	10%, 30%, 50%, 70%, 90% {-o-transform: translateX(-10px);}
-	20%, 40%, 60%, 80% {-o-transform: translateX(10px);}
-}
-
-@keyframes shake {
-	0%, 100% {transform: translateX(0);}
-	10%, 30%, 50%, 70%, 90% {transform: translateX(-10px);}
-	20%, 40%, 60%, 80% {transform: translateX(10px);}
-}
-
-.shake {
-	-webkit-animation-name: shake;
-	-moz-animation-name: shake;
-	-o-animation-name: shake;
-	animation-name: shake;
 }

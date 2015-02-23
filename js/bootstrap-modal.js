@@ -72,59 +72,77 @@
 			this.tab();
 
 			this.options.loading && this.loading();
+
+            if (!this.$element.hasClass('fade')) {
+                this.$element.removeClass("animated").removeClass(this.options.hideanimation);
+                this.$element.addClass("animated").addClass(this.options.showanimation);
+            }
 		},
 
 		hide: function (e) {
-			e && e.preventDefault();
+            e && e.preventDefault();
 
-			e = $.Event('hide');
+            e = $.Event('hide');
 
-			this.$element.trigger(e);
+            this.$element.trigger(e);
 
-			if (!this.isShown || e.isDefaultPrevented()) return;
+            if (!this.isShown || e.defaultPrevented) return;
 
-			this.isShown = false;
+            this.isShown = false;
 
-			this.escape();
+            this.escape();
 
-			this.tab();
+            this.tab();
 
-			this.isLoading && this.loading();
+            this.isLoading && this.loading();
 
-			$(document).off('focusin.modal');
+            $(document).off('focusin.modal');
 
-			this.$element
-				.removeClass('in')
-				.removeClass('animated')
-				.removeClass(this.options.attentionAnimation)
-				.removeClass('modal-overflow')
-				.attr('aria-hidden', true);
+            this.$element
+                .removeClass('in')
+                .removeClass('animated')
+                .removeClass(this.options.attentionanimation)
+                .removeClass('modal-overflow')
+                .attr('aria-hidden', true);
 
-			$.support.transition && this.$element.hasClass('fade') ?
-				this.hideWithTransition() :
-				this.hideModal();
+            var showAnimation = this.options.showanimation;
+            var hideAnimation = this.options.hideanimation;
+
+            if (!$.support.transition) {
+                this.hideModal();
+            } else if (this.$element.hasClass('fade')) {
+                this.hideWithTransition();
+            } else if (hideAnimation.length > 0) {
+                if (showAnimation.length > 0) this.$element.removeClass("animated").removeClass(showAnimation);
+                if (hideAnimation.length > 0) this.$element.addClass("animated").addClass(hideAnimation);
+                this.hideWithTransition();
+            } else {
+                this.hideModal();
+            }
 		},
 
 		layout: function () {
-			var prop = this.options.height ? 'height' : 'max-height',
-				value = this.options.height || this.options.maxHeight;
+            var prop = this.options.height ? 'height' : 'max-height',
+                value = this.options.height || this.options.maxHeight;
 
-			if (this.options.width){
-				this.$element.css('width', this.options.width);
+            if (this.options.width){
+                this.$element.css('width', this.options.width);
+                this.$element.find(".modal-dialog").css('width', 'auto');
+            } else if (this.$element.hasClass("container")) {
+                this.$element.find(".modal-dialog").css('width', 'auto');
+            } else {
+                if (this.$element.find(".modal-sm").length == 0 && this.$element.find(".modal-lg").length == 0 &&  this.$element.hasClass("container") ==  false)
+                    this.$element.css('width', '600');
+            }
 
-				var that = this;
-				this.$element.css('margin-left', function () {
-					if (/%/ig.test(that.options.width)){
-						return -(parseInt(that.options.width) / 2) + '%';
-					} else {
-						return -($(this).width() / 2) + 'px';
-					}
-				});
-			} else {
-				this.$element.css('width', '');
-				this.$element.css('margin-left', '');
-			}
-
+            if ($(window).width() >= 768) {
+                this.$element.css('margin-left', function () {
+                    return +(($(window).width() - $(this).width()) / 2) + 'px';
+                });
+            } else {
+                this.$element.css('left', '0');
+            }
+            
 			this.$element.find('.modal-body')
 				.css('overflow', '')
 				.css(prop, '');
@@ -195,16 +213,16 @@
 		},
 
 		hideWithTransition: function () {
-			var that = this
-				, timeout = setTimeout(function () {
-					that.$element.off($.support.transition.end);
-					that.hideModal();
-				}, 500);
+            var that = this
+                , timeout = setTimeout(function () {
+                    that.$element.off($.support.transition.end);
+                    that.hideModal();
+                }, 600);
 
-			this.$element.one($.support.transition.end, function () {
-				clearTimeout(timeout);
-				that.hideModal();
-			});
+            this.$element.one($.support.transition.end, function () {
+                clearTimeout(timeout);
+                that.hideModal();
+            });
 		},
 
 		hideModal: function () {
@@ -274,17 +292,20 @@
 		attention: function (){
 			// NOTE: transitionEnd with keyframes causes odd behaviour
 
-			if (this.options.attentionAnimation){
+            var showAnimation = this.options.showanimation;
+            if (showAnimation.length > 0) this.$element.removeClass("animated").removeClass(showAnimation);
+
+			if (this.options.attentionanimation){
 				this.$element
 					.removeClass('animated')
-					.removeClass(this.options.attentionAnimation);
+					.removeClass(this.options.attentionanimation);
 
 				var that = this;
 
 				setTimeout(function () {
 					that.$element
 						.addClass('animated')
-						.addClass(that.options.attentionAnimation);
+						.addClass(that.options.attentionanimation);
 				}, 0);
 			}
 
@@ -339,7 +360,7 @@
 		backdrop: true,
 		loading: false,
 		show: true,
-		width: null,
+        width: null,
 		height: null,
 		maxHeight: null,
 		modalOverflow: false,
@@ -347,7 +368,9 @@
 		focusOn: null,
 		replace: false,
 		resize: false,
-		attentionAnimation: 'shake',
+        attentionanimation: '',
+        showanimation: '',
+        hideanimation: '',
 		manager: 'body',
 		spinner: '<div class="loading-spinner" style="width: 200px; margin-left: -100px;"><div class="progress progress-striped active"><div class="bar" style="width: 100%;"></div></div></div>',
 		backdropTemplate: '<div class="modal-backdrop" />'
