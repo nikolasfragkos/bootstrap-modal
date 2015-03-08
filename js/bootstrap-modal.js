@@ -16,7 +16,7 @@
  * limitations under the License.
  * ==========================================================
  *
- * bootstrap-modal.js v3 by Nikolas Fragkos
+ * bootstrap-modal.js v3.2 by Nikolas Fragkos
  */
 
 
