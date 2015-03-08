@@ -40,21 +40,26 @@
 
             this.options = options;
 
-            this.$element = $(element)
-                .delegate('[data-dismiss="modal"]', 'click.dismiss.modal', $.proxy(this.hide, this));
+            this.$element = $(element).delegate('[data-dismiss="modal"]', 'click.dismiss.modal', $.proxy(this.hide, this));
 
             this.options.remote && this.$element.find('.modal-body').load(this.options.remote, function () {
                 var e = $.Event('loaded');
                 that.$element.trigger(e);
             });
 
-            var manager = typeof this.options.manager === 'function' ?
-                this.options.manager.call(this) : this.options.manager;
+            var manager = typeof this.options.manager === 'function' ? this.options.manager.call(this) : this.options.manager;
 
-            manager = manager.appendModal ?
-                manager : $(manager).modalmanager().data('modalmanager');
+            manager = manager.appendModal ? manager : $(manager).modalmanager().data('modalmanager');
 
             manager.appendModal(this);
+
+            if (!this.$element.hasClass("fade") && this.options.showanimation != "") {
+                this.$element.css("-webkit-animation-duration", this.options.animationduration + 'ms', 'important');
+                this.$element.css("-moz-animation-duration", this.options.animationduration + 'ms', 'important');
+                this.$element.css("-o-animation-duration", this.options.animationduration + 'ms', 'important');
+                this.$element.css("animation-duration", this.options.animationduration + 'ms', 'important');
+                this.options.backdroptemplate = '<div class="modal-backdrop-fade"></div>';
+            }
         },
 
         toggle: function () {
@@ -218,13 +223,28 @@
         },
 
         hideWithTransition: function () {
+            var animation_duration = this.options.animationduration;
+
+            var backdrop_timeout;
+            if (this.$element.hasClass("fade")) {
+                if (this.$backdrop) backdrop_timeout = this.$backdrop.css("transition-duration").replace("s", "") * 1000 + 50;
+            } else {
+                backdrop_timeout = animation_duration / 3;
+            }
+
+            var thatBackdrop = this
+                , timeoutBackdrop = setTimeout(function () {
+                    if (thatBackdrop.$backdrop) thatBackdrop.$backdrop.removeClass("in");
+                }, backdrop_timeout);
+
             var that = this
                 , timeout = setTimeout(function () {
                     that.$element.off($.support.transition.end);
                     that.hideModal();
-                }, 600);
+                }, animation_duration);
 
             this.$element.one($.support.transition.end, function () {
+                clearTimeout(timeoutBackdrop);
                 clearTimeout(timeout);
                 that.hideModal();
             });
@@ -379,9 +399,10 @@
         attentionanimation: '',
         showanimation: '',
         hideanimation: '',
+        animationduration: '350',
         manager: 'body',
         spinner: '<div class="loading-spinner" style="width: 200px; margin-left: -100px;"><div class="progress progress-striped active"><div class="bar" style="width: 100%;"></div></div></div>',
-        backdropTemplate: '<div class="modal-backdrop" />'
+        backdroptemplate: '<div class="modal-backdrop" />'
     };
 
     $.fn.modal.Constructor = Modal;

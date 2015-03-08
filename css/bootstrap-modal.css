@@ -46,13 +46,6 @@ body.modal-open,
     position: fixed;
 }
 
-.animated {
-    -webkit-animation-duration: 0.6s !important;
-    -moz-animation-duration: 0.6s !important;
-    -o-animation-duration: 0.6s !important;
-    animation-duration: 0.6s !important;
-}
-
 .modal.container {
     max-width: none;
 }
@@ -115,6 +108,25 @@ body.modal-open,
     top: 50%;
 }
 
+.modal-backdrop-fade {
+    background-color: #000;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+
+    -webkit-transition: opacity 0.15s linear;
+    -moz-transition: opacity 0.15s linear;
+    -o-transition: opacity 0.15s linear;
+    transition: opacity 0.15s linear;
+    opacity: 0;
+}
+
+.modal-backdrop-fade.in {
+    opacity: 0.5;
+}
+
 .modal-body {
     max-height: none;
     overflow: visible;
@@ -142,7 +154,7 @@ body.modal-open,
 
 .modal-backdrop,
 .modal-backdrop.fade.in {
-    opacity: 0.7;
+    opacity: 0.5;
     filter: alpha(opacity=70);
     background: #333;
 }

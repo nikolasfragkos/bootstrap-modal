@@ -52,7 +52,7 @@
                     </pre>
                     <div class="text-center">
                         <div class="row">
-                            <div class="col-sm-4">
+                            <div class="col-sm-3">
                                 <div class="form-group">
                                     <label class="col-sm-4 control-label">Show Animation</label>
                                     <div class="col-sm-8">
@@ -110,7 +110,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-3">
                                 <div class="form-group">
                                     <label class="col-sm-4 control-label">Hide Animation</label>
                                     <div class="col-sm-8">
@@ -167,7 +167,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-3">
                                 <div class="form-group">
                                     <label class="col-sm-4 control-label">Attention Animation</label>
                                     <div class="col-sm-8">
@@ -183,6 +183,14 @@
                                                 <option value="wobble">wobble</option>
                                             </optgroup>
                                         </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Animation Duration (ms)</label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" id="animationDuration" value="350">
                                     </div>
                                 </div>
                             </div>
@@ -583,6 +591,7 @@
                 animationModal.attr("data-showAnimation", $("#showAnimation").val());
                 animationModal.attr("data-hideAnimation", $("#hideAnimation").val());
                 animationModal.attr("data-attentionAnimation", $("#attentionAnimation").val());
+                animationModal.attr("data-animationDuration", $("#animationDuration").val());
 
                 animationModal.modal("show");
             });
