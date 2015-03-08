@@ -89,6 +89,9 @@ Set the animation when hiding the modal. Any animation in [animate.css](http://d
 + **attentionAnimation**
 Set the animation used by the `attention` method. Any animation in [animate.css](http://daneden.me/animate/) is supported.
 
++ **animationDuration**
+Set the duration(ms) for all animations.
+
 + **modalOverflow**
 Set this property to true for modals with highly dynamic content. This will force the modal to behave as if it is larger than the viewport.
 
